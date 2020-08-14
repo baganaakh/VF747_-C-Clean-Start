@@ -197,14 +197,6 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
@@ -235,7 +227,6 @@
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox8.SuspendLayout();
-            this.groupBox7.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1638,7 +1629,6 @@
             this.tabPage2.Controls.Add(this.radioButton4);
             this.tabPage2.Controls.Add(this.groupBox4);
             this.tabPage2.Controls.Add(this.groupBox5);
-            this.tabPage2.Controls.Add(this.groupBox7);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -1657,9 +1647,9 @@
             this.user_email,
             this.user_phone});
             this.listView2.HideSelection = false;
-            this.listView2.Location = new System.Drawing.Point(8, 390);
+            this.listView2.Location = new System.Drawing.Point(8, 283);
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(775, 220);
+            this.listView2.Size = new System.Drawing.Size(775, 327);
             this.listView2.TabIndex = 9;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Details;
@@ -1845,7 +1835,7 @@
             this.groupBox5.Controls.Add(this.label5);
             this.groupBox5.Controls.Add(this.listBox1);
             this.groupBox5.Controls.Add(this.groupBox8);
-            this.groupBox5.Location = new System.Drawing.Point(249, 206);
+            this.groupBox5.Location = new System.Drawing.Point(249, 7);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(534, 173);
             this.groupBox5.TabIndex = 2;
@@ -1926,9 +1916,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(6, 66);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(149, 13);
+            this.label5.Size = new System.Drawing.Size(31, 13);
             this.label5.TabIndex = 2;
-            this.label5.Text = "Address of Tag Data(WORD):";
+            this.label5.Text = "7777";
             // 
             // listBox1
             // 
@@ -1957,62 +1947,6 @@
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(175, 21);
             this.comboBox3.TabIndex = 2;
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.listView1);
-            this.groupBox7.Location = new System.Drawing.Point(249, 3);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(534, 199);
-            this.groupBox7.TabIndex = 2;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "List EPC of Tags";
-            // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader16,
-            this.columnHeader3,
-            this.columnHeader11,
-            this.columnHeader12});
-            this.listView1.GridLines = true;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(0, 21);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(522, 177);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "NO.";
-            this.columnHeader1.Width = 35;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "ID.";
-            this.columnHeader2.Width = 211;
-            // 
-            // columnHeader16
-            // 
-            this.columnHeader16.Text = "RSSI";
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Length";
-            // 
-            // columnHeader11
-            // 
-            this.columnHeader11.Text = "Success";
-            this.columnHeader11.Width = 70;
-            // 
-            // columnHeader12
-            // 
-            this.columnHeader12.Text = "Times";
-            this.columnHeader12.Width = 80;
             // 
             // groupBox2
             // 
@@ -2131,7 +2065,6 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox8.ResumeLayout(false);
-            this.groupBox7.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -2146,7 +2079,6 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox checkBox3;
@@ -2163,10 +2095,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.ComboBox comboBox3;
@@ -2252,8 +2180,6 @@
         private System.Windows.Forms.TextBox textBox36;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.ComboBox comboBox19;
-        private System.Windows.Forms.ColumnHeader columnHeader11;
-        private System.Windows.Forms.ColumnHeader columnHeader12;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.Label label50;
@@ -2316,7 +2242,6 @@
         private System.Windows.Forms.RadioButton rdbrs485;
         private System.Windows.Forms.TextBox txt485address;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ColumnHeader columnHeader16;
         private System.Windows.Forms.CheckBox ckbrssi;
         private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.ColumnHeader NO;

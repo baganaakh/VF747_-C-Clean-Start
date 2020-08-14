@@ -194,7 +194,6 @@ namespace ReaderDemo
                 Read_times = 0;
                 k = 0;
                 count_test = 0;
-                listView1.Items.Clear();
                 timer1.Interval = Interval;
                 timer1.Enabled = true;
             }
@@ -207,17 +206,10 @@ namespace ReaderDemo
                 byte[] dada = new byte[1024];
                 for (int i = 0; i < k; i++)
                 {
-                    str = listView1.Items[i].SubItems[3].Text;
-                    TagBuffer[i, 0] = Convert.ToByte(str, 16);
-                    str = listView1.Items[i].SubItems[1].Text;
-                    for (int j = 0; j < str.Length / 2; j++)
-                    {
-                        strtemp = str[j * 2].ToString() + str[j * 2 + 1].ToString();
-                        TagBuffer[i, j + 1] = (byte)Convert.ToInt16(strtemp, 16);
-                    }
+                    
                     strtemp = "";
                     strtemp = (i + 1).ToString("D2") + ".";
-                    comboBox3.Items.Add(strtemp + str);
+                    comboBox3.Items.Add(strtemp + "777");
                 }
                 if (k != 0)
                 {
@@ -395,19 +387,10 @@ namespace ReaderDemo
 
                                     for (j = 0; j < k; j++)
                                     {
-                                        strtemp = listView1.Items[j].SubItems[3].Text;
                                         ID_len_temp = Convert.ToInt32(strtemp, 16) * 2;
 
                                         if (ID_len == ID_len_temp)
                                         {
-                                            str_temp = listView1.Items[j].SubItems[1].Text;
-                                            if (str == str_temp)
-                                            {
-                                                success = Convert.ToInt32(listView1.Items[j].SubItems[4].Text) + 1;
-                                                listView1.Items[j].SubItems[4].Text = success.ToString();
-                                                listView1.Items[j].SubItems[2].Text = RSSI;
-                                                break;
-                                            }
                                         }
                                     }
                                     if (j == k)
@@ -416,7 +399,6 @@ namespace ReaderDemo
                                         {
                                             if (str.Substring(StartBit, DataLenth) == Datastr)
                                             {
-                                                item = listView1.Items.Add((k + 1).ToString(), k);
                                                 item.SubItems.Add(str);
                                                 item.SubItems.Add(RSSI.ToString());
                                                 item.SubItems.Add(TagBuffer[i, 0].ToString("X2"));
@@ -514,21 +496,10 @@ namespace ReaderDemo
 
                                     for (j = 0; j < k; j++)
                                     {
-                                        strtemp = listView1.Items[j].SubItems[3].Text;
                                         ID_len_temp = Convert.ToInt32(strtemp, 16) * 2;
                                         if (2 == mem)
                                         {
                                             ID_len_temp = Convert.ToInt32(strtemp, 16);
-                                        }
-                                        if (ID_len == ID_len_temp)
-                                        {
-                                            str_temp = listView1.Items[j].SubItems[1].Text;
-                                            if (str == str_temp)
-                                            {
-                                                success = Convert.ToInt32(listView1.Items[j].SubItems[4].Text) + 1;
-                                                listView1.Items[j].SubItems[4].Text = success.ToString();
-                                                break;
-                                            }
                                         }
                                     }
                                     if (j == k)
@@ -537,7 +508,6 @@ namespace ReaderDemo
                                         {
                                             if (str.Substring(StartBit, DataLenth) == Datastr)
                                             {
-                                                item = listView1.Items.Add((k + 1).ToString(), k);
                                                 item.SubItems.Add(str);
                                                 item.SubItems.Add(RSSI.ToString());
                                                 item.SubItems.Add(TagBuffer[i, 0].ToString("X2"));
@@ -550,12 +520,6 @@ namespace ReaderDemo
                                     }
                                 }
                             }
-                        }
-                        for (j = 0; j < k; j++)
-                        {
-
-                            listView1.Items[j].SubItems[5].Text = count_test.ToString();
-
                         }
 
                     }
@@ -580,7 +544,6 @@ namespace ReaderDemo
                                 strtemp = DB[i].ToString("X2");
                                 str += strtemp;
                             }
-                            listBox1.Items.Add(str);
                             microPost(str);
                         }
                     }
@@ -690,11 +653,7 @@ namespace ReaderDemo
             int i;
             string str;
             nidEvent = 2;
-            if (comboBox3.SelectedIndex < 0)
-            {
-                MessageBox.Show("Please identify a tag first!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
+            
             if (Convert.ToInt16(textBox5.Text) < 0)
             {
                 MessageBox.Show("Please input start address of tag more then 0!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
