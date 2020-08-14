@@ -122,103 +122,6 @@ namespace ReaderDemo
         }
 
         #region EPCC1G2
-        #region List Tag ID
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (connect_OK == 0)
-                return;
-            nidEvent = 1;
-            string str, strtemp;
-
-            if (Convert.ToInt32(textBox1.Text) > 95 || Convert.ToInt32(textBox1.Text) < 0)
-            {
-                MessageBox.Show("Please input start address of data between 0 and 95!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                textBox1.Focus();
-                textBox1.SelectAll();
-                button3.Text = "List Tag ID";
-                return;
-            }
-            if (Convert.ToInt32(textBox2.Text) > 96 || Convert.ToInt32(textBox2.Text) < 0)
-            {
-                MessageBox.Show("Please input length of data between 0 and 96 !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                textBox2.Focus();
-                textBox2.SelectAll();
-                button3.Text = "List Tag ID";
-                return;
-            }
-
-            if (radioButton1.Checked == true)
-                mem = 0;
-            if (radioButton2.Checked == true)
-                mem = 1;
-            if (radioButton3.Checked == true)
-                mem = 2;
-            if (radioButton4.Checked == true)
-                mem = 3;
-
-            if (ckbrssi.Checked)
-            {
-                RssiOut = 1;
-            }
-            else
-            {
-                RssiOut = 0;
-            }
-            //过滤记录
-
-            StartBit = Convert.ToInt32(textBox1.Text.Trim());
-
-            DataLenth = Convert.ToInt16(textBox2.Text.Trim());
-
-            if (StartBit != 0)
-            {
-                StartBit = StartBit / 4;
-            }
-
-            if (DataLenth != 0)
-            {
-                DataLenth = DataLenth / 4;
-            }
-
-            Datastr = textBox3.Text.Trim();
-
-            if (StartBit == 0 && DataLenth == 0)
-            {
-                Datastr = "";
-            }
-
-            int[] timrinterval = new int[] { 10, 20, 30, 50, 100, 200, 500 };
-            if (button3.Text == "List Tag ID")
-            {
-                button3.Text = "Stop";
-                Read_times = 0;
-                k = 0;
-                count_test = 0;
-                timer1.Interval = Interval;
-                timer1.Enabled = true;
-            }
-            else
-            {
-                button3.Text = "List Tag ID";
-                timer1.Enabled = false;
-                comboBox3.Items.Clear();
-
-                byte[] dada = new byte[1024];
-                for (int i = 0; i < k; i++)
-                {
-                    
-                    strtemp = "";
-                    strtemp = (i + 1).ToString("D2") + ".";
-                    comboBox3.Items.Add(strtemp + "777");
-                }
-                if (k != 0)
-                {
-                    comboBox3.SelectedIndex = 0;
-                }
-            }
-        }
-        #endregion
-
         #region Timer
         unsafe private void timer1_Tick(object sender, EventArgs e)
         {
@@ -1507,24 +1410,7 @@ namespace ReaderDemo
                 ComMode = 0;
             for (i = 0; i < 3; i++)
             {
-                switch (ComMode)
-                {
-                    case 0:
-                        if (rdbrs485.Checked)
-                        {
-                            RS485Address = Convert.ToInt32(txt485address.Text.Trim());
-                            res = Program.ConnectScanner485(ref m_hScanner, szPort, nBaudRate, RS485Address);
-                        }
-                        else
-                        {
-                            res = Program.ConnectScanner(ref m_hScanner, szPort, ref nBaudRate);
-                        }
-
-                        break;
-                    case 1:
-                        res = Program.Net_ConnectScanner(ref m_hSocket, readerip, readerport, hostip, hostport);
-                        break;
-                }
+                res = Program.Net_ConnectScanner(ref m_hSocket, readerip, readerport, hostip, hostport);
                 if (res == OK)
                     break;
             }
