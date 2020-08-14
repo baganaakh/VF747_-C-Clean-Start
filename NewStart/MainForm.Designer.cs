@@ -164,27 +164,10 @@
             this.textBox28 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.listView2 = new System.Windows.Forms.ListView();
-            this.NO = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.user_name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.user_email = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.user_phone = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.Names = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl1.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -203,8 +186,6 @@
             this.groupBox48.SuspendLayout();
             this.groupBox40.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox8.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -218,6 +199,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(824, 644);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
             // tabPage5
             // 
@@ -1595,7 +1577,6 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.listView2);
-            this.tabPage2.Controls.Add(this.groupBox5);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -1607,167 +1588,14 @@
             // listView2
             // 
             this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.NO,
-            this.id,
-            this.user_name,
-            this.user_email,
-            this.user_phone});
+            this.Names});
             this.listView2.HideSelection = false;
-            this.listView2.Location = new System.Drawing.Point(8, 186);
+            this.listView2.Location = new System.Drawing.Point(8, 6);
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(775, 424);
+            this.listView2.Size = new System.Drawing.Size(775, 604);
             this.listView2.TabIndex = 9;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Details;
-            // 
-            // NO
-            // 
-            this.NO.Text = "No";
-            // 
-            // id
-            // 
-            this.id.Text = "ID";
-            // 
-            // user_name
-            // 
-            this.user_name.Text = "user_name";
-            this.user_name.Width = 100;
-            // 
-            // user_email
-            // 
-            this.user_email.Text = "user_email";
-            this.user_email.Width = 100;
-            // 
-            // user_phone
-            // 
-            this.user_phone.Text = "user_phone";
-            this.user_phone.Width = 100;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.button5);
-            this.groupBox5.Controls.Add(this.textBox8);
-            this.groupBox5.Controls.Add(this.textBox7);
-            this.groupBox5.Controls.Add(this.textBox6);
-            this.groupBox5.Controls.Add(this.textBox5);
-            this.groupBox5.Controls.Add(this.label8);
-            this.groupBox5.Controls.Add(this.label7);
-            this.groupBox5.Controls.Add(this.label6);
-            this.groupBox5.Controls.Add(this.label5);
-            this.groupBox5.Controls.Add(this.listBox1);
-            this.groupBox5.Controls.Add(this.groupBox8);
-            this.groupBox5.Location = new System.Drawing.Point(249, 7);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(534, 173);
-            this.groupBox5.TabIndex = 2;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Read and Write Data Block";
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(363, 135);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(56, 25);
-            this.button5.TabIndex = 11;
-            this.button5.Text = "Read";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(120, 140);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(234, 20);
-            this.textBox8.TabIndex = 10;
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(171, 112);
-            this.textBox7.MaxLength = 8;
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(58, 20);
-            this.textBox7.TabIndex = 9;
-            this.textBox7.Text = "00000000";
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(171, 88);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(58, 20);
-            this.textBox6.TabIndex = 8;
-            this.textBox6.Text = "1";
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(171, 62);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(58, 20);
-            this.textBox5.TabIndex = 7;
-            this.textBox5.Text = "0";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(5, 141);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(98, 13);
-            this.label8.TabIndex = 5;
-            this.label8.Text = "Written Data(HEX):";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(4, 118);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(128, 13);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "Access Password(8HEX):";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(5, 93);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(144, 13);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "Length of Tag Data(WORD):";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 66);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(31, 13);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "7777";
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(235, 61);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(252, 69);
-            this.listBox1.TabIndex = 1;
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Controls.Add(this.comboBox3);
-            this.groupBox8.Location = new System.Drawing.Point(5, 14);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(214, 44);
-            this.groupBox8.TabIndex = 0;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Select a Tag";
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
-            "7777"});
-            this.comboBox3.Location = new System.Drawing.Point(19, 16);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(175, 21);
-            this.comboBox3.TabIndex = 2;
             // 
             // timer1
             // 
@@ -1776,6 +1604,11 @@
             // serialPort1
             // 
             this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
+            // 
+            // Names
+            // 
+            this.Names.Text = "names";
+            this.Names.Width = 160;
             // 
             // MainForm
             // 
@@ -1823,9 +1656,6 @@
             this.groupBox40.ResumeLayout(false);
             this.groupBox40.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1835,19 +1665,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.GroupBox groupBox46;
         private System.Windows.Forms.GroupBox groupBox44;
@@ -1983,11 +1800,7 @@
         private System.Windows.Forms.TextBox txt485address;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.ListView listView2;
-        private System.Windows.Forms.ColumnHeader NO;
-        private System.Windows.Forms.ColumnHeader id;
-        private System.Windows.Forms.ColumnHeader user_name;
-        private System.Windows.Forms.ColumnHeader user_email;
-        private System.Windows.Forms.ColumnHeader user_phone;
+        private System.Windows.Forms.ColumnHeader Names;
     }
 }
 

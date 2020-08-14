@@ -84,11 +84,7 @@ namespace ReaderDemo
             {
                 if (ips.AddressFamily.Equals(AddressFamily.InterNetwork))
                 {
-                    //MessageBox.Show(ips.ToString());
                     textBox37.Text = ips.ToString();
-                    //int j = (int)MessageBox.Show("主机地址是这个IP地址吗(" + textBox37.Text + ")?。", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                    //if (j == 1)
-                    //    break;
                 }
             }
 
@@ -118,7 +114,6 @@ namespace ReaderDemo
             comboBox15.SelectedIndex = 59;
             comboBox13.SelectedIndex = 3;
 
-
         }
 
         #region EPCC1G2
@@ -126,7 +121,7 @@ namespace ReaderDemo
         unsafe private void timer1_Tick(object sender, EventArgs e)
         {
             int i, j, nCounter = 0, ID_len = 0, ID_len_temp = 0, be_antenna, success;
-            string str, str_temp, strtemp;
+            string str, strtemp;
             byte[] DB = new byte[128];
             byte[] IDBuffer = new byte[7680];
             byte[,] chArray = new byte[100, 2600];
@@ -377,16 +372,16 @@ namespace ReaderDemo
                         switch (ComMode)
                         {
                             case 0:
-                                res = Program.EPC1G2_ReadWordBlock(m_hScanner, Convert.ToByte(EPC_Word), IDTemp, Convert.ToByte(mem), Convert.ToByte(textBox5.Text), Convert.ToByte(textBox6.Text), DB, AccessPassWord, RS485Address);
+                                res = Program.EPC1G2_ReadWordBlock(m_hScanner, Convert.ToByte(EPC_Word), IDTemp, Convert.ToByte(mem), Convert.ToByte(0), Convert.ToByte(1), DB, AccessPassWord, RS485Address);
                                 break;
                             case 1:
-                                res = Program.Net_EPC1G2_ReadWordBlock(m_hSocket, Convert.ToByte(EPC_Word), IDTemp, Convert.ToByte(mem), Convert.ToByte(textBox5.Text), Convert.ToByte(textBox6.Text), DB, AccessPassWord);
+                                res = Program.Net_EPC1G2_ReadWordBlock(m_hSocket, Convert.ToByte(EPC_Word), IDTemp, Convert.ToByte(mem), Convert.ToByte(0), Convert.ToByte(1), DB, AccessPassWord);
                                 break;
                         }
                         if (res == OK)
                         {
                             str = "";
-                            for (i = 0; i < Convert.ToByte(textBox6.Text) * 2; i++)
+                            for (i = 0; i < Convert.ToByte(1) * 2; i++)
                             {
                                 strtemp = DB[i].ToString("X2");
                                 str += strtemp;
@@ -501,85 +496,23 @@ namespace ReaderDemo
             string str;
             nidEvent = 2;
             
-            if (Convert.ToInt16(textBox5.Text) < 0)
-            {
-                MessageBox.Show("Please input start address of tag more then 0!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                textBox5.Focus();
-                textBox5.SelectAll();
-                return;
-            }
-            if (Convert.ToInt16(textBox6.Text) < 1)
-            {
-                MessageBox.Show("Please input length of data more than 1!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                textBox6.Focus();
-                textBox6.SelectAll();
-                return;
-            }
-            if (textBox7.Text.Length != 8)
-            {
-                MessageBox.Show("Please input correct accesspassword!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                textBox7.Focus();
-                textBox7.SelectAll();
-                return;
-            }
-            str = textBox7.Text;
+            str = "00000000";
             for (i = 0; i < 4; i++)
             {
                 AccessPassWord[i] = Convert.ToByte(str.Substring(i * 2, 2), 16);
             }
 
-            EPC_Word = TagBuffer[comboBox3.SelectedIndex, 0];
-            for (i = 0; i < TagBuffer[comboBox3.SelectedIndex, 0] * 2; i++)
+            EPC_Word = TagBuffer[1, 0];
+            for (i = 0; i < TagBuffer[1, 0] * 2; i++)
             {
-                IDTemp[i] = TagBuffer[comboBox3.SelectedIndex, i + 1];
+                IDTemp[i] = TagBuffer[1, i + 1];
             }            
                 mem = 3;
-
-            int[] timrinterval = new int[] { 10, 20, 30, 50, 100, 200, 500 };
-            if (button5.Text == "Read")
-            {
                 m_antenna_sel = 1;
-                
-                switch (m_antenna_sel)
-                {
-                   
-                    case 1:                   
-                        for (i = 0; i < 3; i++)
-                        {
-                            switch (ComMode)
-                            {
-                                case 0:
-                                    res = Program.SetAntenna(m_hScanner, m_antenna_sel, RS485Address);
-                                    break;
-                                case 1:
-                                    res = Program.Net_SetAntenna(m_hSocket, m_antenna_sel);
-                                    break;
-                            }
-                            if (res == OK)
-                                break;
-
-                        }
-                        if (res != 0)
-                        {
-                            MessageBox.Show("Fail to set antenna!Please try again!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            button5.Text = "Read";
-                            return;
-                        }
-                        break;
-                }
-                button5.Text = "Stop";
                 Read_times = 0;
                 k = 0;
-                listBox1.Items.Clear();
                 timer1.Interval = Interval;
                 timer1.Enabled = true;
-            }
-            else
-            {
-                button5.Text = "Read";
-                timer1.Enabled = false;
-            }
-
         }
         #endregion
         #endregion
@@ -1609,6 +1542,12 @@ namespace ReaderDemo
                 return;
             }
         }
+
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            button5_Click(null, null);
+        }
+
         private void button10_Click(object sender, EventArgs e)
         {
             int i = 0;
