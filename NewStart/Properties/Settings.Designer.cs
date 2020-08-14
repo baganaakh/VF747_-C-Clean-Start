@@ -22,5 +22,29 @@ namespace NewStart.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.7.53")]
+        public string ipOfReader {
+            get {
+                return ((string)(this["ipOfReader"]));
+            }
+            set {
+                this["ipOfReader"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.7.76")]
+        public string ipOfHost {
+            get {
+                return ((string)(this["ipOfHost"]));
+            }
+            set {
+                this["ipOfHost"] = value;
+            }
+        }
     }
 }

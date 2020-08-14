@@ -11,7 +11,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.IO;
 using System.Web.Script.Serialization;
-
+using NewStart.Properties;
 namespace ReaderDemo
 {
     public partial class MainForm : Form
@@ -114,6 +114,8 @@ namespace ReaderDemo
             comboBox15.SelectedIndex = 59;
             comboBox13.SelectedIndex = 3;
 
+            textBox35.Text = Settings.Default["ipOfReader"].ToString();
+            textBox37.Text = Settings.Default["ipOfHost"].ToString();
         }
 
         #region EPCC1G2
@@ -1327,6 +1329,9 @@ namespace ReaderDemo
             else
             {
                 connect_OK = 1;
+                Settings.Default["ipOfReader"] = textBox35.Text;
+                Settings.Default["ipOfHost"] = textBox37.Text;
+                Settings.Default.Save();
                 MessageBox.Show("Connect reader success!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
 
@@ -1337,6 +1342,7 @@ namespace ReaderDemo
             ReaderParam();
             button26.Enabled = false;
             button27.Enabled = true;
+            
             this.tabControl1.SelectedIndex = 2;
         }
         #endregion
@@ -1545,7 +1551,7 @@ namespace ReaderDemo
 
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
-            button5_Click(null, null);
+            button26_Click(null,null);
         }
 
         private void button10_Click(object sender, EventArgs e)

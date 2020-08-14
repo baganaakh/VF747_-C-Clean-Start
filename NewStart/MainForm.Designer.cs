@@ -318,7 +318,7 @@
             this.label42.TabIndex = 9;
             this.label42.Text = "Port of Reader:";
             // 
-            // label41
+            // label41s
             // 
             this.label41.AutoSize = true;
             this.label41.Location = new System.Drawing.Point(35, 131);
@@ -345,6 +345,7 @@
             // 
             // textBox36
             // 
+            this.textBox36.Enabled = false;
             this.textBox36.Location = new System.Drawing.Point(171, 174);
             this.textBox36.Name = "textBox36";
             this.textBox36.Size = new System.Drawing.Size(88, 20);
