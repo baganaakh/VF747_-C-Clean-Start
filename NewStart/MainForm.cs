@@ -19,7 +19,7 @@ namespace ReaderDemo
         Program Program = new Program();
         public int res, k, Detect, cmd;
         public int m_hScanner = -1, m_hSocket = -1, OK = 0;
-        public int nBaudRate = 0, Interval, EPC_Word;
+        public int nBaudRate = 0, Interval=100, EPC_Word;
         public string szPort;
         public int HardVersion, SoftVersion;
         public int hwnd;
@@ -74,7 +74,6 @@ namespace ReaderDemo
             string strtemp = "";
             double Freq = 0, jumpFreq = 0, temp = 0;
 
-            comboBox2.SelectedIndex = 3;
             comboBox19.SelectedIndex = 0;
             button27.Enabled = false;
             comboBox19.Enabled = false;
@@ -118,6 +117,8 @@ namespace ReaderDemo
             comboBox14.SelectedIndex = 7;
             comboBox15.SelectedIndex = 59;
             comboBox13.SelectedIndex = 3;
+
+
         }
 
         #region EPCC1G2
@@ -187,7 +188,6 @@ namespace ReaderDemo
             }
 
             int[] timrinterval = new int[] { 10, 20, 30, 50, 100, 200, 500 };
-            Interval = timrinterval[comboBox2.SelectedIndex];
             if (button3.Text == "List Tag ID")
             {
                 button3.Text = "Stop";
@@ -203,7 +203,6 @@ namespace ReaderDemo
                 button3.Text = "List Tag ID";
                 timer1.Enabled = false;
                 comboBox3.Items.Clear();
-                comboBox4.Items.Clear();
 
                 byte[] dada = new byte[1024];
                 for (int i = 0; i < k; i++)
@@ -219,12 +218,10 @@ namespace ReaderDemo
                     strtemp = "";
                     strtemp = (i + 1).ToString("D2") + ".";
                     comboBox3.Items.Add(strtemp + str);
-                    comboBox4.Items.Add(strtemp + str);
                 }
                 if (k != 0)
                 {
                     comboBox3.SelectedIndex = 0;
-                    comboBox4.SelectedIndex = 0;
                 }
             }
         }
@@ -729,39 +726,18 @@ namespace ReaderDemo
             for (i = 0; i < TagBuffer[comboBox3.SelectedIndex, 0] * 2; i++)
             {
                 IDTemp[i] = TagBuffer[comboBox3.SelectedIndex, i + 1];
-            }
-            if (radioButton5.Checked == true)
-                mem = 0;
-            if (radioButton6.Checked == true)
-                mem = 1;
-            if (radioButton7.Checked == true)
-                mem = 2;
-            if (radioButton8.Checked == true)
+            }            
                 mem = 3;
 
             int[] timrinterval = new int[] { 10, 20, 30, 50, 100, 200, 500 };
-            Interval = timrinterval[comboBox2.SelectedIndex];
             if (button5.Text == "Read")
             {
-                m_antenna_sel = 0;
-                if (checkBox1.Checked == true)
-                    m_antenna_sel += 1;
-                if (checkBox2.Checked == true)
-                    m_antenna_sel += 2;
-                if (checkBox3.Checked == true)
-                    m_antenna_sel += 4;
-                if (checkBox4.Checked == true)
-                    m_antenna_sel += 8;
+                m_antenna_sel = 1;
+                
                 switch (m_antenna_sel)
                 {
-                    case 0:
-                        MessageBox.Show("Please choose one antenna at least!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        button5.Text = "Read";
-                        return;
-                    case 1:
-                    case 2:
-                    case 4:
-                    case 8:
+                   
+                    case 1:                   
                         for (i = 0; i < 3; i++)
                         {
                             switch (ComMode)
@@ -800,214 +776,6 @@ namespace ReaderDemo
 
         }
         #endregion
-
-        #region Write
-        private void button6_Click(object sender, EventArgs e)
-        {
-            if (connect_OK == 0)
-                return;
-            int i;
-            string str;
-            listBox1.Items.Clear();
-
-            if (textBox7.Text.Length != 8)
-            {
-                MessageBox.Show("Please input correct accesspassword!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                textBox7.Focus();
-                textBox7.SelectAll();
-                return;
-            }
-
-            str = textBox7.Text;
-            for (i = 0; i < 4; i++)
-            {
-                AccessPassWord[i] = (byte)Convert.ToInt16((str[i * 2].ToString() + str[i * 2 + 1].ToString()), 16);
-            }
-
-            if (radioButton5.Checked == true)
-                mem = 0;
-            if (radioButton6.Checked == true)
-                mem = 1;
-            if (radioButton7.Checked == true)
-                mem = 2;
-            if (radioButton8.Checked == true)
-                mem = 3;
-            switch (mem)
-            {
-                case 0:
-                case 2:
-                    if (Convert.ToInt16(textBox6.Text) < 1 || Convert.ToInt16(textBox6.Text) > 4)
-                    {
-                        MessageBox.Show("Please input Length of Tag Data between 1 and 4 Word !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        textBox6.Focus();
-                        textBox6.SelectAll();
-                        return;
-                    }
-                    break;
-                case 1:
-                    if (Convert.ToInt16(textBox6.Text) < 1 || Convert.ToInt16(textBox6.Text) > 6)
-                    {
-                        MessageBox.Show("Please input Length of Tag Data between 1 and 6 Word !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        textBox6.Focus();
-                        textBox6.SelectAll();
-                        return;
-                    }
-                    break;
-                case 3:
-                    if (Convert.ToInt16(textBox6.Text) < 1 || Convert.ToInt16(textBox6.Text) > 8)
-                    {
-                        MessageBox.Show("Please input Length of Tag Data between 1 and 6 Word !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        textBox6.Focus();
-                        textBox6.SelectAll();
-                        return;
-                    }
-                    break;
-            }
-
-            if (textBox8.Text.Length == 0 || textBox8.Text.Length / 4 < Convert.ToInt16(textBox6.Text))
-            {
-                MessageBox.Show("Please input enough Length of Tag Data!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-
-            str = textBox8.Text;
-            for (i = 0; i < textBox8.Text.Length / 2; i++)
-            {
-                mask[i] = (byte)Convert.ToInt16((str[i * 2].ToString() + str[i * 2 + 1].ToString()), 16);
-            }
-
-            m_antenna_sel = 0;
-            if (checkBox1.Checked == true)
-                m_antenna_sel += 1;
-            if (checkBox2.Checked == true)
-                m_antenna_sel += 2;
-            if (checkBox3.Checked == true)
-                m_antenna_sel += 4;
-            if (checkBox4.Checked == true)
-                m_antenna_sel += 8;
-            switch (m_antenna_sel)
-            {
-                case 1:
-                case 2:
-                case 4:
-                case 8:
-                    for (i = 0; i < 3; i++)
-                    {
-                        switch (ComMode)
-                        {
-                            case 0:
-                                res = Program.SetAntenna(m_hScanner, m_antenna_sel, RS485Address);
-                                break;
-                            case 1:
-                                res = Program.Net_SetAntenna(m_hSocket, m_antenna_sel);
-                                break;
-                        }
-                        if (res == OK)
-                            break;
-
-                    }
-                    if (res != OK)
-                    {
-                        MessageBox.Show("SetAntenna Fail!Please try again!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
-                    }
-                    break;
-                default:
-                    MessageBox.Show("Please choose one antenna at least!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-            }
-            len = Convert.ToInt16(textBox6.Text);
-            if (mem == 1)
-            {
-                for (i = 0; i < 5; i++)
-                {
-                    Thread.Sleep(30);
-                    switch (ComMode)
-                    {
-                        case 0:
-                            res = Program.EPC1G2_WriteEPC(m_hScanner, Convert.ToByte(textBox6.Text), mask, AccessPassWord, RS485Address);
-                            break;
-                        case 1:
-                            res = Program.Net_EPC1G2_WriteEPC(m_hSocket, Convert.ToByte(textBox6.Text), mask, AccessPassWord);
-                            break;
-                    }
-                    if ((res == OK) || (res == 5) || (res == 8) || (res == 9))
-                        break;
-                }
-            }
-            else
-            {
-                if (comboBox3.SelectedIndex < 0)
-                {
-                    MessageBox.Show("Please read first than choose a tag!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
-                switch (mem)
-                {
-                    case 0:
-                    case 2:
-                        if (Convert.ToInt16(textBox5.Text) < 0 || Convert.ToInt16(textBox5.Text) > 3)
-                        {
-                            MessageBox.Show("Please input Location of Tag Address between 0 and 4!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            textBox5.Focus();
-                            textBox5.SelectAll();
-                            return;
-                        }
-                        if ((len + Convert.ToInt16(textBox5.Text)) > 4)
-                        {
-                            len = 4 - Convert.ToInt16(textBox5.Text);
-                        }
-                        break;
-                    case 3:
-                        if (Convert.ToInt16(textBox5.Text) < 0)
-                        {
-                            MessageBox.Show("Please input Location of Tag Address more than 0!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            textBox5.Focus();
-                            textBox5.SelectAll();
-                            return;
-                        }
-                        break;
-                }
-                EPC_Word = TagBuffer[comboBox3.SelectedIndex, 0];
-                for (i = 0; i < TagBuffer[comboBox3.SelectedIndex, 0] * 2; i++)
-                {
-                    IDTemp[i] = TagBuffer[comboBox3.SelectedIndex, i + 1];
-                }
-
-                for (i = 0; i < 5; i++)
-                {
-                    Thread.Sleep(30);
-                    switch (ComMode)
-                    {
-                        case 0:
-                            res = Program.EPC1G2_WriteWordBlock(m_hScanner, Convert.ToByte(EPC_Word), IDTemp, Convert.ToByte(mem), Convert.ToByte(textBox5.Text), Convert.ToByte(len), mask, AccessPassWord, RS485Address);
-                            break;
-                        case 1:
-                            res = Program.Net_EPC1G2_WriteWordBlock(m_hSocket, Convert.ToByte(EPC_Word), IDTemp, Convert.ToByte(mem), Convert.ToByte(textBox5.Text), Convert.ToByte(len), mask, AccessPassWord);
-                            break;
-                    }
-                    if ((res == OK) || (res == 5) || (res == 8) || (res == 9))
-                        break;
-                }
-            }
-
-            if (res == OK)
-            {
-                listBox1.Items.Add("Write Successfully!");
-            }
-            else
-            {
-                this.ReportError(ref str);
-                if (str == "Unbeknown Error!")
-                    str = "Write Fail!";
-                if (res == 9)
-                    str = "The access password is error!";
-                listBox1.Items.Add(str);
-            }
-        }
-        #endregion
-
-     
         #endregion
 
         private void button24_Click(object sender, EventArgs e)
@@ -1399,7 +1167,6 @@ namespace ReaderDemo
                 MessageBox.Show("Fail to reboot reader!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
-
         public int ReaderParam()
         {
             int i = 0;
@@ -1739,7 +1506,6 @@ namespace ReaderDemo
 
             return OK;
         }
-
         private void button25_Click(object sender, EventArgs e)
         {
             if (connect_OK == 0)
@@ -1766,7 +1532,7 @@ namespace ReaderDemo
             else
                 MessageBox.Show("Set relay successfully!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
+        #region connect reader
         private void button26_Click(object sender, EventArgs e)
         {
             int i;
@@ -1849,9 +1615,9 @@ namespace ReaderDemo
             ReaderParam();
             button26.Enabled = false;
             button27.Enabled = true;
-            this.tabControl1.SelectedIndex = 1;
+            this.tabControl1.SelectedIndex = 2;
         }
-
+        #endregion
         private void button27_Click(object sender, EventArgs e)
         {
             switch (ComMode)
@@ -1866,8 +1632,6 @@ namespace ReaderDemo
             button26.Enabled = true;
             button27.Enabled = false;
         }
-
-
         private void button1_Click(object sender, EventArgs e)
         {
             if (connect_OK == 0)
@@ -1899,7 +1663,6 @@ namespace ReaderDemo
                 textBox45.Text = "Set reader time successfully!";
             }
         }
-
         private void button28_Click(object sender, EventArgs e)
         {
             if (connect_OK == 0)
@@ -1938,7 +1701,6 @@ namespace ReaderDemo
             textBox45.Text += ":";
             textBox45.Text += time.Second.ToString("D2");
         }
-
         private void button29_Click(object sender, EventArgs e)
         {
             if (connect_OK == 0)
@@ -2004,7 +1766,6 @@ namespace ReaderDemo
 
             MessageBox.Show("Set default parameter successfully!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
         private void button9_Click(object sender, EventArgs e)
         {
             int i = 0;
@@ -2059,7 +1820,6 @@ namespace ReaderDemo
                 return;
             }
         }
-
         private void button10_Click(object sender, EventArgs e)
         {
             int i = 0;
@@ -2109,7 +1869,6 @@ namespace ReaderDemo
             }
             textBox15.Text = str;
         }
-
         private void button11_Click(object sender, EventArgs e)
         {
 
@@ -2138,7 +1897,6 @@ namespace ReaderDemo
                 MessageBox.Show("Stop Auto Mode fail!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
-
         private void button12_Click(object sender, EventArgs e)
         {
             button12.Enabled = false;
@@ -2157,7 +1915,6 @@ namespace ReaderDemo
                 MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
-
         private void IPReceiveCallBack(IAsyncResult AR)
         {
             try
@@ -2185,7 +1942,6 @@ namespace ReaderDemo
 
             }
         }
-
         private void UpdateListView()
         {
             int row = 0;
@@ -2219,7 +1975,6 @@ namespace ReaderDemo
             button12.Enabled = true;
             button13.Enabled = false;
         }
-
 
         private void EpcReceiveCallBack(IAsyncResult AR)
         {
@@ -2372,7 +2127,6 @@ namespace ReaderDemo
             }
         }
 
-
         private void radioButton42_CheckedChanged(object sender, EventArgs e)
         {
             textBox35.Enabled = true;
@@ -2397,18 +2151,6 @@ namespace ReaderDemo
         {
             textBox35.Text = listView4.SelectedItems[0].SubItems[1].Text;
             textBox36.Text = listView4.SelectedItems[0].SubItems[2].Text;
-        }
-
-
-
-        private void rdbrs485_CheckedChanged(object sender, EventArgs e)
-        {
-            textBox35.Enabled = false;
-            textBox36.Enabled = false;
-            textBox37.Enabled = false;
-            textBox38.Enabled = false;
-            comboBox19.Enabled = true;
-            txt485address.Enabled = true;
         }
     }
 }
