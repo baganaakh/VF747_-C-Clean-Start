@@ -135,15 +135,7 @@ namespace ReaderDemo
 
             Read_times++;
             Thread.Sleep(Interval);
-
-            be_antenna = 0;
-
-            switch (Read_times % 4)
-            {
-                case 0:
-                    if (checkBox1.Checked == true)
-                    {
-                        be_antenna = 1;
+            be_antenna = 1;
                         switch (ComMode)
                         {
                             case 0:
@@ -153,54 +145,6 @@ namespace ReaderDemo
                                 res = Program.Net_SetAntenna(m_hSocket, be_antenna);
                                 break;
                         }
-                    }
-                    break;
-                case 1:
-                    if (checkBox2.Checked == true)
-                    {
-                        be_antenna = 2;
-                        switch (ComMode)
-                        {
-                            case 0:
-                                res = Program.SetAntenna(m_hScanner, be_antenna, RS485Address);
-                                break;
-                            case 1:
-                                res = Program.Net_SetAntenna(m_hSocket, be_antenna);
-                                break;
-                        }
-                    }
-                    break;
-                case 2:
-                    if (checkBox3.Checked == true)
-                    {
-                        be_antenna = 4;
-                        switch (ComMode)
-                        {
-                            case 0:
-                                res = Program.SetAntenna(m_hScanner, be_antenna, RS485Address);
-                                break;
-                            case 1:
-                                res = Program.Net_SetAntenna(m_hSocket, be_antenna);
-                                break;
-                        }
-                    }
-                    break;
-                case 3:
-                    if (checkBox4.Checked == true)
-                    {
-                        be_antenna = 8;
-                        switch (ComMode)
-                        {
-                            case 0:
-                                res = Program.SetAntenna(m_hScanner, be_antenna, RS485Address);
-                                break;
-                            case 1:
-                                res = Program.Net_SetAntenna(m_hSocket, be_antenna);
-                                break;
-                        }
-                    }
-                    break;
-            }
 
             ListViewItem item = new ListViewItem();
             switch (nidEvent)
