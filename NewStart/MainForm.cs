@@ -71,6 +71,9 @@ namespace ReaderDemo
         {
             int i;
 
+            textBox35.Text = Settings.Default["ipOfReader"].ToString();
+            textBox37.Text = Settings.Default["ipOfHost"].ToString();
+
             string strtemp = "";
             double Freq = 0, jumpFreq = 0, temp = 0;
 
@@ -113,9 +116,6 @@ namespace ReaderDemo
             comboBox14.SelectedIndex = 7;
             comboBox15.SelectedIndex = 59;
             comboBox13.SelectedIndex = 3;
-
-            textBox35.Text = Settings.Default["ipOfReader"].ToString();
-            textBox37.Text = Settings.Default["ipOfHost"].ToString();
         }
 
         #region EPCC1G2
@@ -488,7 +488,10 @@ namespace ReaderDemo
             }
         }
         #endregion
-
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            button5_Click(null, null);
+        }
         #region Read
         private void button5_Click(object sender, EventArgs e)
         {
@@ -1548,12 +1551,6 @@ namespace ReaderDemo
                 return;
             }
         }
-
-        private void tabControl1_Selected(object sender, TabControlEventArgs e)
-        {
-            button26_Click(null,null);
-        }
-
         private void button10_Click(object sender, EventArgs e)
         {
             int i = 0;
@@ -1702,14 +1699,12 @@ namespace ReaderDemo
                 myitem.SubItems.Add(ReaderPort.ToString());
             }
         }
-
         private void button13_Click(object sender, EventArgs e)
         {
             NetSocket.Close();
             button12.Enabled = true;
             button13.Enabled = false;
         }
-
         private void EpcReceiveCallBack(IAsyncResult AR)
         {
             try
@@ -1730,7 +1725,6 @@ namespace ReaderDemo
 
             }
         }
-
         private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
             try
@@ -1758,7 +1752,6 @@ namespace ReaderDemo
                 MessageBox.Show(ex.Message);
             }
         }
-
         private void UpdateEpcView()
         {
             string str;
